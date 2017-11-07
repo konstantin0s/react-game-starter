@@ -65,11 +65,11 @@ export const fetchPlayers = (game) => {
   }
 }
 
-export const fetchOneGame = (id) => {
+export const fetchOneGame = (gameId) => {
   return dispatch => {
     dispatch({ type: APP_LOADING })
 
-    api.get(`/games/${id}`)
+    api.get(`/games/${gameId}`)
       .then((result) => {
         dispatch({ type: APP_DONE_LOADING })
         dispatch({ type: LOAD_SUCCESS })

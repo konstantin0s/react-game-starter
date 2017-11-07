@@ -82,12 +82,12 @@ class Game extends PureComponent {
 const mapStateToProps = ({ currentUser, games }, { match }) => {
   const game = games.filter((g) => (g._id === match.params.gameId))[0]
   const currentPlayer = game && game.players.filter((p) => (p.userId === currentUser._id))[0]
-
+  const hasTurn = !!currentPlayer && game.players[game.turn].userId === currentUser._id
   return {
     currentPlayer,
     game,
     isPlayer: !!currentPlayer,
-    hasTurn: currentPlayer && currentPlayer._id === currentUser._id,
+    hasTurn,
     isJoinable: game && !currentPlayer && game.players.length < 2
   }
 }

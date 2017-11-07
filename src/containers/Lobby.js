@@ -34,7 +34,7 @@ class Lobby extends PureComponent {
   }
 
   isPlayable(game) {
-    return game.players.length === 2
+    return this.isPlayer(game) && game.players.length === 2
   }
 
   renderGame = (game, index) => {
