@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { fetchOneGame, fetchPlayers } from '../actions/games/fetch'
+import { fetchOneGame, fetchPlayers, sendTurn } from '../actions/games/fetch'
 import { connect as subscribeToWebsocket } from '../actions/websocket'
 import JoinGameDialog from '../components/games/JoinGameDialog'
+import './Game.css'
 
 const playerShape = PropTypes.shape({
   userId: PropTypes.string.isRequired,
@@ -14,6 +15,7 @@ const playerShape = PropTypes.shape({
 class Game extends PureComponent {
   static propTypes = {
     fetchOneGame: PropTypes.func.isRequired,
+    sendTurn: PropTypes.func.isRequired,
     fetchPlayers: PropTypes.func.isRequired,
     subscribeToWebsocket: PropTypes.func.isRequired,
     game: PropTypes.shape({
@@ -54,6 +56,12 @@ class Game extends PureComponent {
     }
   }
 
+clickButton(buttonId) {
+    const gameId = this.props.game._id
+    this.props.sendTurn(gameId, buttonId)
+    // console.log(gameId, buttonId)
+  }
+
   render() {
     const { game } = this.props
 
@@ -69,6 +77,17 @@ class Game extends PureComponent {
         <p>{title}</p>
 
         <h1>YOUR GAME HERE! :)</h1>
+        <div id="game">
+          <button id="0" onClick={() => this.clickButton(0)}>0</button>
+          <button id="1" onClick={() => this.clickButton(1)}>1</button>
+          <button id="2" onClick={() => this.clickButton(2)}>2</button>
+          <button id="3" onClick={() => this.clickButton(3)}>3</button>
+          <button id="4" onClick={() => this.clickButton(4)}>4</button>
+          <button id="5" onClick={() => this.clickButton(5)}>5</button>
+          <button id="6" onClick={() => this.clickButton(6)}>6</button>
+          <button id="7" onClick={() => this.clickButton(7)}>7</button>
+          <button id="8" onClick={() => this.clickButton(8)}>8</button>
+        </div>
 
         <h2>Debug Props</h2>
         <pre>{JSON.stringify(this.props, true, 2)}</pre>
@@ -93,6 +112,7 @@ const mapStateToProps = ({ currentUser, games }, { match }) => {
 }
 
 export default connect(mapStateToProps, {
+  sendTurn,
   subscribeToWebsocket,
   fetchOneGame,
   fetchPlayers

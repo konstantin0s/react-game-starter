@@ -11,6 +11,7 @@ import { GAME_PLAYERS_UPDATED } from './subscribe'
 
 export const FETCHED_GAMES = 'FETCHED_GAMES'
 export const FETCHED_ONE_GAME = 'FETCHED_ONE_GAME'
+export const SENT_TURN = 'SENT_TURN'
 
 const api = new API()
 
@@ -84,6 +85,19 @@ export const fetchOneGame = (gameId) => {
         dispatch({
           type: LOAD_ERROR,
           payload: error.message
+        })
+      })
+  }
+}
+
+
+export const sendTurn = (gameId, buttonId) => {
+  return dispatch => {
+    api.put(`/games/${gameId}`, buttonId)
+      .then((result) => {
+        dispatch({
+          type: SENT_TURN,
+          payload: result
         })
       })
   }

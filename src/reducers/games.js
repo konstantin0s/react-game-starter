@@ -1,5 +1,5 @@
 // src/reducers/games.js
-import { FETCHED_GAMES, FETCHED_ONE_GAME } from '../actions/games/fetch'
+import { FETCHED_GAMES, FETCHED_ONE_GAME, SENT_TURN } from '../actions/games/fetch'
 import {
   GAME_CREATED,
   GAME_UPDATED,
@@ -29,6 +29,13 @@ export default (state = [], { type, payload } = {}) => {
       return [newGame].concat(state)
 
     case GAME_UPDATED :
+      return state.map((game) => {
+        if (game._id === payload._id) {
+          return { ...payload }
+        }
+        return game
+      })
+    case SENT_TURN :
       return state.map((game) => {
         if (game._id === payload._id) {
           return { ...payload }
