@@ -73,20 +73,22 @@ clickButton(buttonId) {
 
     return (
       <div className="Game">
-        <h1>Game!</h1>
+
         <p>{title}</p>
 
-        <h1>YOUR GAME HERE! :)</h1>
+        <h1 className="title">Let the Game begin :)</h1>
         <div id="game">
-          <button id="0" onClick={() => this.clickButton(0)}>0</button>
-          <button id="1" onClick={() => this.clickButton(1)}>1</button>
-          <button id="2" onClick={() => this.clickButton(2)}>2</button>
-          <button id="3" onClick={() => this.clickButton(3)}>3</button>
-          <button id="4" onClick={() => this.clickButton(4)}>4</button>
-          <button id="5" onClick={() => this.clickButton(5)}>5</button>
-          <button id="6" onClick={() => this.clickButton(6)}>6</button>
-          <button id="7" onClick={() => this.clickButton(7)}>7</button>
-          <button id="8" onClick={() => this.clickButton(8)}>8</button>
+          <div id="board">
+             <div className="square" id="0" onClick={() => this.clickButton(0)}>0</div>
+             <div className="square" id="1" onClick={() => this.clickButton(1)}>1</div>
+             <div className="square" id="2" onClick={() => this.clickButton(2)}>2</div>
+             <div className="square" id="3" onClick={() => this.clickButton(3)}>3</div>
+             <div className="square" id="4" onClick={() => this.clickButton(4)}>4</div>
+             <div className="square" id="5" onClick={() => this.clickButton(5)}>5</div>
+             <div className="square" id="6" onClick={() => this.clickButton(6)}>6</div>
+             <div className="square" id="7" onClick={() => this.clickButton(7)}>7</div>
+             <div className="square" id="8" onClick={() => this.clickButton(8)}>8</div>
+          </div>
         </div>
 
         <h2>Debug Props</h2>
